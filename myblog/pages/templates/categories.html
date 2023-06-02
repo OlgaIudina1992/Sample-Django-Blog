@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if category_posts %}
+        <h1>{{cats}}</h1>
+<ul>
+{% for post in category_posts %}
+    <li><b><a href="{% url 'article-detailed' post.pk %}">{{post.title}}</a></b> | {{post.author}} | {{post.pub_date}}
+        {% if user.is_authenticated and post.author.id == user.id %}
+        <small>
+        <a href="{% url 'update_post' post.pk %}">Edit</a> 
+        |
+        <a href="{% url 'delete_post' post.pk %}">Delete</a>
+        <br />
+        </small>
+        {% endif %}
+    <br />{{post.body|truncatewords:20}}</li><br />
+{% endfor %}
+</ul>
+{%else%}
+<h1>This category is empty</h1>
+{%endif%}
+<br />
+<a href="{% url 'home' %}" class="btn btn-danger">Back</a>
+{% endblock %}
