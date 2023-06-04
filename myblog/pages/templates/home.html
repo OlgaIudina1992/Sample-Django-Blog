@@ -14,7 +14,8 @@
         <br />
         </small>
         {% endif %}
-    {{post.body|truncatewords:20}}</li><br />
+    {{post.snippet}} 
+    </li>
 {% endfor %}
 </ul>
 {% endblock %}
